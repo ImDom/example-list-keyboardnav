@@ -1,0 +1,161 @@
+@notebarWidth: 220px;
+@headerHeight: 46px;
+
+.side-borders(@color: #0f0, @size: 1px, @type: solid) {
+	border-left: @size @type @color;
+	border-right: @size @type @color;
+}
+
+.center-block() {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.allow-selection() {
+	cursor: auto;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	user-select: text;
+}
+
+html, body {
+	width: 100%;
+	min-height: 100%;
+}
+
+body {
+	box-sizing: border-box;
+	padding: @headerHeight @notebarWidth 0 0;
+	font-family: sans-serif;
+	text-align: center;
+	cursor: default;
+	
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	user-select: none;
+}
+
+
+@keyboardNavigatedActiveIndicatorWidth: 2px;
+.keyboard-navigated {
+	position: relative;
+	
+	&.active > .active-indicator {
+		display: block;
+	}
+	
+	> .item {
+		padding: 14px;
+		border-top: 1px solid #efefef;
+		border-left: @keyboardNavigatedActiveIndicatorWidth solid transparent;
+		
+		&:first-child {
+			border-top: none;
+		}
+		
+		&:hover {
+			border-left-color: #eef;
+		}
+	}
+	
+	> .active-indicator {
+		width: @keyboardNavigatedActiveIndicatorWidth;
+		background: #bbf;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+	}
+}
+
+.header-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding-right: @notebarWidth;
+	box-sizing: border-box;
+	background: #A49A87;
+	z-index: 10000;
+}
+
+#header {
+	width: 940px;
+	height: @headerHeight;
+	line-height: @headerHeight;
+	text-align: left;
+	padding: 0 14px;
+	.center-block();
+	
+	h1 {
+		float: right;
+		text-transform: uppercase;
+		color: #fff;
+		font-size: 24px;
+		margin: 0;
+		padding: 0;
+		line-height: @headerHeight;
+	}
+}
+
+.menu-wrapper {
+	float: left;
+}
+
+#menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	float: left;
+	
+	> li {
+		float: left;
+		margin-right: 10px;
+		
+		> a {
+			display: block;
+			heigth: @headerHeight;
+			line-height: @headerHeight;
+			color: #fff;
+			font-weight: bold;
+		}
+	}
+}
+
+#content {
+	width: 940px;
+	min-height: 100%;
+	padding: 14px;
+	text-align: left;
+	.side-borders(#efefef);
+	.center-block();
+	
+	> header:first-child h1 {
+		color: #332532;
+		font-size: 26px;
+	}
+	
+	a {
+		color: #644D52;
+	}
+	
+	p {
+		.allow-selection();
+	}
+}
+
+.notebar {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: @notebarWidth;
+	height:  100%;
+	border-left: 1px solid #efefef;
+	background: #fafafa;
+	text-align: left;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 20000;
+	padding: 7px;
+	box-sizing: border-box;
+}
