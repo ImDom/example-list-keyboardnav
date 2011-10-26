@@ -1,6 +1,7 @@
 var el = {
 	$html_body: $("html,body"),
-	$document: $(document)
+	$document: $(document),
+	$window: $(window)
 };
 
 var helper = {
@@ -38,41 +39,46 @@ var script = {
 	},
 	
 	initScrollables: function() {
-		var $scrollables = $(".scrollable");
-		$scrollables.unbind(".mousewheel.scrollable");
-		
-		$scrollables.each(function() {
-			var $this = $(this)
-			,   $scroll = $this.find(".scrollable-scrollbar")
-			,   scrollbarMaxHeight = $scroll.parent().height()
-			,   height = $this.innerHeight()
-			,   scrollHeight = $this[0].scrollHeight;
+		var scrollables = [];
+		$(".scrollable").each(function() {
+			//$.unbind("mousewheel.scrollable");
+			var $this = $(this);
 			
-			var scrollbarHeight = scrollbarMaxHeight * (height/scrollHeight);
-			$scroll.height(scrollbarHeight);
+			var jsp = $this.jScrollPane().data("jsp");
+			
+			scrollables.push(jsp);
 			
 			var _hold = false;
 			$this.bind("mousewheel.scrollable", function(e, d) {
-				e.preventDefault();
-				if (_hold) return;
+				if (_hold) { return };
 				_hold = true;
 
-				var scrollTop = $this.scrollTop()
-				,   scrollTopNew = (scrollTop === 0 && d > 0) || (scrollTop === scrollHeight-height && d < 0) ? scrollTop : scrollTop + (d*10)*-1;
+				var $this = $(this)
+				,   scrollTop = $this.scrollTop()
+				,   scrollHeight = $this[0].scrollHeight
+				,   height = $this.height();
 
-				$this.scrollTop(scrollTopNew);
-
-				scrollbarPos = scrollbarMaxHeight * (scrollTopNew / scrollHeight);
-				$scroll.css("top", scrollbarPos);
-
-				//if ((scrollTopNew === (scrollHeight - height) && d < 0) || (scrollTopNew === 0 && d > 0)) {
-
-				//} else {
-
-				//}
+				if ((scrollTop === (scrollHeight - height) && d < 0) || (scrollTop === 0 && d > 0)) {
+					e.preventDefault();
+				}
 
 				_hold = false;
 			});
+		});
+		
+		var _hold = false;
+		el.$window.bind({
+			resize: function() {
+				if (_hold) { return; }
+				_hold = true;
+				
+				for (var i in scrollables) {
+					var scrollable = scrollables[i];
+					scrollable.reinitialise();
+				}
+				
+				_hold = false;
+			}
 		});
 	},
 	

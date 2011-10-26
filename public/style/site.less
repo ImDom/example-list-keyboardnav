@@ -81,26 +81,7 @@ body {
 
 .scrollable {
 	position: relative;
-	
-	.scrollable-scrollbar-wrapper {
-		position: fixed;
-		width: 7px;
-		top: 2px;
-		bottom: 2px;
-		right: 2px;
-	}
-	
-	.scrollable-scrollbar {
-		width: 7px;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		right: 0;
-		background-color: #000;
-		
-		.opacity(60);
-		.border-radius(4px);
-	}
+	overflow: auto;
 }
 
 .header-wrapper {
@@ -188,7 +169,6 @@ body {
 	border-left: 1px solid #efefef;
 	background: #fafafa;
 	text-align: left;
-	overflow: hidden;
 	z-index: 20000;
 	padding: 7px;
 	box-sizing: border-box;
