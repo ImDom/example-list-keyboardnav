@@ -1,11 +1,11 @@
+.jspScrollable:focus {
+	outline: none;
+}
+
 .jspContainer
 {
 	overflow: hidden;
 	position: relative;
-}
-
-.jspContainer:active {
-	outline: none;
 }
 
 .jspPane
