@@ -13,187 +13,137 @@
 
 	<link rel="stylesheet" href="https://raw.github.com/ImDom/cepp/master/public/style/style.css">
 	<link rel="stylesheet" href="https://raw.github.com/ImDom/cepp/master/public/style/jquery.jscrollpane.css">
-	<style rel="stylesheet/less">
-@notebarWidth: 220px;
-@headerHeight: 46px;
-
-.side-borders(@color: #0f0, @size: 1px, @type: solid) {
-	border-left: @size @type @color;
-	border-right: @size @type @color;
-}
-
-.center-block() {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.allow-selection() {
-	cursor: auto;
-	-webkit-user-select: text;
-	-moz-user-select: text;
-	user-select: text;
-}
-
-.border-radius(@radius: 2px) {
-	-webkit-border-radius: @radius;
-	-moz-border-radius: @radius;
-	border-radius: @radius;
-}
-
-.opacity(@opacity: 100) {
-	opacity: @opacity/100;
-	filter: alpha(opacity=@opacity);
-}
-
+	<style>
 html, body {
-	width: 100%;
-	min-height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
-
 body {
-	box-sizing: border-box;
-	padding: @headerHeight @notebarWidth 0 0;
-	font-family: sans-serif;
-	text-align: center;
-	cursor: default;
-	
-	-webkit-user-select: none;
-	-moz-user-select: -moz-none;
-	user-select: none;
+  box-sizing: border-box;
+  padding: 46px 220px 0 0;
+  font-family: sans-serif;
+  text-align: center;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  user-select: none;
 }
-
-
-@keyboardNavigatedActiveIndicatorWidth: 2px;
 .keyboard-navigated {
-	position: relative;
-	
-	&.active > .active-indicator {
-		display: block;
-	}
-	
-	> .item {
-		padding: 14px;
-		border-top: 1px solid #efefef;
-		border-left: @keyboardNavigatedActiveIndicatorWidth solid transparent;
-		
-		&:first-child {
-			border-top: none;
-		}
-		
-		&:hover {
-			border-left-color: #eef;
-		}
-	}
-	
-	> .active-indicator {
-		width: @keyboardNavigatedActiveIndicatorWidth;
-		background: #bbf;
-		position: absolute;
-		top: 0;
-		left: 0;
-		display: none;
-	}
+  position: relative;
 }
-
+.keyboard-navigated.active > .active-indicator {
+  display: block;
+}
+.keyboard-navigated > .item {
+  padding: 14px;
+  border-top: 1px solid #efefef;
+  border-left: 2px solid transparent;
+}
+.keyboard-navigated > .item:first-child {
+  border-top: none;
+}
+.keyboard-navigated > .item:hover {
+  border-left-color: #eef;
+}
+.keyboard-navigated > .active-indicator {
+  width: 2px;
+  background: #bbf;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
 .scrollable {
-	position: relative;
-	overflow: auto;
+  position: relative;
+  overflow: auto;
 }
-
 .header-wrapper {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	padding-right: @notebarWidth;
-	box-sizing: border-box;
-	background: #A49A87;
-	z-index: 10000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-right: 220px;
+  box-sizing: border-box;
+  background: #A49A87;
+  z-index: 10000;
 }
-
 #header {
-	width: 940px;
-	height: @headerHeight;
-	line-height: @headerHeight;
-	text-align: left;
-	padding: 0 14px;
-	.center-block();
-	
-	h1 {
-		float: right;
-		text-transform: uppercase;
-		color: #fff;
-		font-size: 24px;
-		margin: 0;
-		padding: 0;
-		line-height: @headerHeight;
-	}
+  width: 940px;
+  height: 46px;
+  line-height: 46px;
+  text-align: left;
+  padding: 0 14px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
+#header h1 {
+  float: right;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+  line-height: 46px;
+}
 .menu-wrapper {
-	float: left;
+  float: left;
 }
-
 #menu {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	float: left;
-	
-	> li {
-		float: left;
-		margin-right: 10px;
-		
-		> a {
-			display: block;
-			heigth: @headerHeight;
-			line-height: @headerHeight;
-			color: #fff;
-			font-weight: bold;
-		}
-	}
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  float: left;
 }
-
+#menu > li {
+  float: left;
+  margin-right: 10px;
+}
+#menu > li > a {
+  display: block;
+  heigth: 46px;
+  line-height: 46px;
+  color: #fff;
+  font-weight: bold;
+}
 #content {
-	width: 940px;
-	min-height: 100%;
-	padding: 14px;
-	text-align: left;
-	.side-borders(#efefef);
-	.center-block();
-	
-	> header:first-child h1 {
-		color: #332532;
-		font-size: 26px;
-	}
-	
-	a {
-		color: #644D52;
-	}
-	
-	p {
-		.allow-selection();
-	}
+  width: 940px;
+  min-height: 100%;
+  padding: 14px;
+  text-align: left;
+  border-left: 1px solid #efefef;
+  border-right: 1px solid #efefef;
+  margin-left: auto;
+  margin-right: auto;
 }
-
+#content > header:first-child h1 {
+  color: #332532;
+  font-size: 26px;
+}
+#content a {
+  color: #644D52;
+}
+#content p {
+  cursor: auto;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
+}
 #notebar {
-	position: fixed;
-	top: 0;
-	right: 0;
-	width: @notebarWidth;
-	height:  100%;
-	border-left: 1px solid #efefef;
-	background: #fafafa;
-	text-align: left;
-	z-index: 20000;
-	padding: 7px;
-	box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 220px;
+  height: 100%;
+  border-left: 1px solid #efefef;
+  background: #fafafa;
+  text-align: left;
+  z-index: 20000;
+  padding: 7px;
+  box-sizing: border-box;
 }
-
 
 	</style>
 
-	<script src="https://raw.github.com/ImDom/cepp/master/public/js/libs/less-1.1.3.js"></script>
 	<script src="https://raw.github.com/ImDom/cepp/master/public/js/libs/modernizr-2.0.min.js"></script>
 </head>
 <body>
