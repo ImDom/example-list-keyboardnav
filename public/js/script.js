@@ -39,19 +39,53 @@ var script = {
 	},
 	
 	initScrollables: function() {
-		var scrollables = [];
+		el.$window.unbind(".scrollable");
+		$(".scrollable").unbind(".scrollable");
+		
 		$(".scrollable").each(function() {
 			//$.unbind("mousewheel.scrollable");
 			var $this = $(this);
 			
-			var jsp = $this.jScrollPane().data("jsp");
+			var jsp = $this.jScrollPane({
+				horizontalGutter: -7,
+				verticalGutter: -7
+			}).data("jsp");
 			
-			scrollables.push(jsp);
+			var $scrollWrapper = $this.find(".jspVerticalBar, .jspHorizontalBar");
 			
-			var _hold = false;
+			var _resizeHold = false;
+			el.$window.bind("resize.scrollable", function() {
+				if (_resizeHold) { return; }
+				_resizeHold = true;
+				jsp.reinitialise();
+				_resizeHold = false;
+			});
+			
+			var scrollShowTimeout = 0;
+			function scrollShow() {
+				clearTimeout(scrollShowTimeout);
+				$scrollWrapper.stop(true, true).show();
+				scrollShowTimeout = setTimeout(function() { $scrollWrapper.fadeOut(500) }, 1000);
+			};
+			
+			scrollShow();
+			
+			$this.bind("mouseover.scrollable", function(e) {
+				scrollShow();
+			});
+			
+			var _scrollHold = false;
+			$this.bind("scroll.scrollable", function() {
+				if (_scrollHold) { return; }
+				_scrollHold = true;
+				scrollShow();
+				_scrollHold = false;
+			});
+			
+			var _mousewheelHold = false;
 			$this.bind("mousewheel.scrollable", function(e, d) {
-				if (_hold) { return };
-				_hold = true;
+				if (_mousewheelHold) { return };
+				_mousewheelHold = true;
 
 				var $this = $(this)
 				,   scrollTop = $this.scrollTop()
@@ -62,23 +96,8 @@ var script = {
 					e.preventDefault();
 				}
 
-				_hold = false;
+				_mousewheelHold = false;
 			});
-		});
-		
-		var _hold = false;
-		el.$window.bind({
-			resize: function() {
-				if (_hold) { return; }
-				_hold = true;
-				
-				for (var i in scrollables) {
-					var scrollable = scrollables[i];
-					scrollable.reinitialise();
-				}
-				
-				_hold = false;
-			}
 		});
 	},
 	
