@@ -38,6 +38,7 @@ body {
 	box-sizing: border-box;
 	padding: @headerHeight @notebarWidth 0 0;
 	font-family: sans-serif;
+	font-size: 12px;
 	text-align: center;
 	cursor: default;
 	
@@ -56,7 +57,7 @@ body {
 	}
 	
 	> .item {
-		padding: 14px;
+		padding: 1em 2em;
 		border-top: 1px solid #efefef;
 		border-left: @keyboardNavigatedActiveIndicatorWidth solid transparent;
 		
@@ -155,8 +156,65 @@ body {
 		color: #644D52;
 	}
 	
-	p {
+	p, article {
 		.allow-selection();
+	}
+	
+	.login-form {
+		padding: 2em 0;
+		
+		> label {
+			margin: 0 0 1em;
+			
+			> .login-form-label {
+				display: block;
+				margin: 0 0 0.5em;
+			}
+			
+			> .login-form-checkbox-label {
+				margin: 0 0 0 0.5em;
+			}
+			
+			input {
+				background-color: #fff;
+				border: 1px solid #cecece;
+				border-top-color: #ccc;
+				outline: none;
+				box-sizing: border-box;
+				.border-radius(2px);
+				
+				&:hover {
+					border-color: #aeaeae;
+					border-top-color: #aaa;
+					box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+				}
+				
+				&:focus, &:active {
+					border-color: #aaf;
+					box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+				}
+			}
+			
+			> input[type="text"] {
+				width: 268px;
+				height: 34px;
+				padding: 6px 10px;
+				font-size: 1.2em;
+			}
+			
+			> input[type="checkbox"] {
+				float: left;
+				vertical-align: bottom;
+				width: 12px;
+				height: 12px;
+				-webkit-appearance: none;
+				appearance: none;
+				
+				&:checked {
+					background: #0f0;
+				}
+			}
+		}
 	}
 }
 
@@ -171,7 +229,7 @@ body {
 	text-align: left;
 	z-index: 20000;
 		
-	.list-item {
+	#notebar-list > .list-item {
 		min-height: 40px;
 		border-bottom: 1px solid #dcdcdc;
 		background-color: #f0f0f0;

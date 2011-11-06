@@ -1,10 +1,15 @@
 var el = {
 	$html_body: $("html,body"),
 	$document: $(document),
-	$window: $(window)
+	$window: $(window),
+	
+	$notebar: $("#notebar"),
+	$notebarList: $("#notebar-list")
 };
 
 var helper = {
+	focusableTagNames: ["INPUT, TEXTAREA"],
+	
 	positionElementMiddleOnScreen: function(element, speed) {
 		speed = arguments.length > 1 ? speed : false;
 		
@@ -34,11 +39,22 @@ var helper = {
 
 var script = {
 	init: function() {
-		this.initScrollables();
+		this.initScrollables(function() {
+			!function() {
+				var _markup = '<li class="list-item"></li>';
+				$.template("notebar-list-item", _markup);
+				setInterval(function() {
+					el.$notebarList.append($.tmpl("notebar-list-item"));
+					var jsp = el.$notebar.data("jsp");
+					jsp.reinitialise()
+					//jsp.scrollToPercentY(100);
+				}, 1000);
+			}();
+		});
 		this.initKeyboardNavigated();
 	},
 	
-	initScrollables: function() {
+	initScrollables: function(callback) {
 		el.$window.unbind(".scrollable");
 		$(".scrollable").unbind(".scrollable");
 		
@@ -70,7 +86,7 @@ var script = {
 			
 			scrollShow();
 			
-			$this.bind("mouseover.scrollable", function(e) {
+			$this.bind("mouseenter.scrollable", function(e) {
 				scrollShow();
 			});
 			
@@ -99,6 +115,10 @@ var script = {
 				_mousewheelHold = false;
 			});
 		});
+		
+		if (arguments.length > 0) {
+			callback.call(this);
+		}
 	},
 	
 	initKeyboardNavigated: function() {
@@ -182,8 +202,12 @@ var script = {
 			
 			var keyUp = e.keyCode === keyUpCode
 			,   keyDown = e.keyCode === keyDownCode;
-
-			if ((keyUp || keyDown) && activeWrapper) {
+			
+			var $target = $(e.target);
+			var focusableElementFocused =  $.inArray(e.target.tagName, helper.focusableTagNames) > -1
+				|| typeof $target.attr("tabindex") !== "undefined";
+							
+			if ((keyUp || keyDown) && activeWrapper && !focusableElementFocused) {
 				e.preventDefault();
 
 				var currentActiveItem = activeWrapper.find(".active:first");

@@ -65,15 +65,22 @@
 			Hello world of tests<br>
 		</article>
 		<article class="item">
-			Hello world of tests<br>
-			Hello world of tests<br>
-			Hello world of tests<br>
-			Hello world of tests<br>
-			Hello world of tests<br>
-			Hello world of tests<br>
-			Hello world of tests<br>
-			Hello world of tests<br>
-			Hello world of tests
+			<form method="post" class="login-form">
+				<label class="block">
+					<strong class="login-form-label">First name</strong>
+					<input type="text" placeholder="Donald">
+				</label>
+				
+				<label class="block">
+					<strong class="login-form-label">Last name</strong>
+					<input type="text" placeholder="Duck">
+				</label>
+				
+				<label>
+					<input type="checkbox" checked>
+					<span class="login-form-checkbox-label">Remember me</span>
+				</label>
+			</form>
 		</article>
 		<article class="item">
 			Hello world of tests
@@ -143,48 +150,14 @@
 </section>
 		
 <div id="notebar" class="scrollable">
-	<ul>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-		<li class="list-item"></li>
-	</ul>
+	<ul id="notebar-list"></ul>
 </div>
 
 <!-- scripts -->
 <script src="public/js/libs/jquery-1.6.4.min.js"></script>
 <script src="public/js/libs/jquery.mousewheel.js"></script>
-<script src="public/js/libs/jquery.jscrollpane.min.js">
+<script src="public/js/libs/jquery.jscrollpane.min.js"></script>
+<script src="public/js/libs/jquery.tmpl.js"></script>
 <script src="public/js/plugins.js"></script>
 <script src="public/js/script.js"></script>
 <!-- end scripts-->
