@@ -188,7 +188,7 @@ var script = {
 					}
 				}
 				
-				moveActiveItemIndicator($clickedItem, 100);
+				moveActiveItemIndicator($clickedItem, 100, false);
 			} else {
 				activeWrapper = false;
 				activeItemIndicator = false;
