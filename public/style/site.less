@@ -92,7 +92,9 @@ body {
 	width: 100%;
 	padding-right: @notebarWidth;
 	box-sizing: border-box;
-	background: #A49A87;
+	background: #fafafa;
+	border-bottom: 1px solid #dcdcdc;
+	box-shadow: 0 3px 12px rgba(0,0,0,0.1);
 	z-index: 10000;
 }
 
@@ -107,11 +109,12 @@ body {
 	h1 {
 		float: right;
 		text-transform: uppercase;
-		color: #fff;
+		color: #222;
 		font-size: 24px;
 		margin: 0;
 		padding: 0;
 		line-height: @headerHeight;
+		display: none;
 	}
 }
 
@@ -133,7 +136,7 @@ body {
 			display: block;
 			heigth: @headerHeight;
 			line-height: @headerHeight;
-			color: #fff;
+			color: #222;
 			font-weight: normal;
 			font-size: 1.2em;
 		}
